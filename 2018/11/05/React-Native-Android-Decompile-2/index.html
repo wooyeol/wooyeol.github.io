@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="지난번 포스팅에서는 React Native로 만들어진 안드로이드 앱의 decompile에 대해서 알아보았는데요. 이번 시간에는 React Native를 이용하여 만든 안드로이드 앱의 보안에 대해 알아보도록 하겠습니다.
+
+React Native를 이용해 안드로이드 앱을 ">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Wooyeol Jung">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="React Native 안드로이드 앱(2/2)">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="지난번 포스팅에서는 React Native로 만들어진 안드로이드 앱의 decompile에 대해서 알아보았는데요. 이번 시간에는 React Native를 이용하여 만든 안드로이드 앱의 보안에 대해 알아보도록 하겠습니다.
+
+React Native를 이용해 안드로이드 앱을 ">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Rightline&#39;s Dev">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://wooyeol.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://wooyeol.github.iohttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>React Native 안드로이드 앱(2/2) - Rightline&#39;s Dev</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-131935405-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+    <!-- favicon -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Configurable Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://wooyeol.github.io">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>React Native 안드로이드 앱(2/2)</h1>
+                    
+                    <h2 class="post-subheading">
+                        보안
+                    </h2>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-05
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Android/">#Android</a> <a href="/tags/React-Native/">#React Native</a> <a href="/tags/security/">#security</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>지난번 포스팅에서는 React Native로 만들어진 안드로이드 앱의 decompile에 대해서 알아보았는데요. 이번 시간에는 React Native를 이용하여 만든 안드로이드 앱의 보안에 대해 알아보도록 하겠습니다.</p>
+<p><img src="https://user-images.githubusercontent.com/9836231/49194316-f89dd400-f3c5-11e8-847f-ff8136a37bbd.png" alt="img"></p>
+<p>React Native를 이용해 안드로이드 앱을 만들었다고 할지라도, 결국에는 안드로이드 앱입니다. 때문에 우선 기본적인 안드로이드 환경에서의 앱보안이 중요합니다. 안드로이드에서 강조하는 일반적인 보안 팁은 구글의 안드로이드 개발자 페이지에 자세히 나와 있습니다. (참고 : <a href="https://developer.android.com/training/articles/security-tips?hl=ko" target="_blank" rel="noopener">https://developer.android.com/training/articles/security-tips?hl=ko</a>)</p>
+<p>추가적인 보안 강화를 위해 Proguard를 이용한 난독화 적용이 필요합니다. Proguard는 코드 및 리소스 축소의 목적도 있지만, decompile 시 내부 로직 분석을 방해하여 어플리케이션 크랙킹을 대비하는 목적도 있습니다. React Native를 이용하더라도 커스텀 component를 만드는 경우도 있고, 안드로이드 전용 코드를 작성하는 경우도 있기 때문에 Proguard 적용은 해야 합니다. Proguard를 적용하게 되면 java로 작성된 코드는 난독화가 적용되지만, React Native의 코드가 저장된 JavaScript bundle 파일의 내용은 난독화되지 않습니다. </p>
+<p>그렇다면 React Native 코드를 보호하려면 어떻게 해야할까요? React Native 프로젝트에 대해 조금 더 살펴보도록 하겠습니다. 우선 React Native로 생성된 프로젝트의 Android 영역을 살펴보면, 아래 이미지처럼 MainApplication.java와 MainActivity.java 두 개의 파일을 볼 수 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> <span class="keyword">implements</span> <span class="title">ReactApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> ReactNativeHost mReactNativeHost = <span class="keyword">new</span> ReactNativeHost(<span class="keyword">this</span>) &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">getUseDeveloperSupport</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> BuildConfig.DEBUG;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">          <span class="keyword">new</span> MainReactPackage()</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> String <span class="title">getJSMainModuleName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> ReactNativeHost <span class="title">getReactNativeHost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mReactNativeHost;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    SoLoader.init(<span class="keyword">this</span>, <span class="comment">/* native exopackage */</span> <span class="keyword">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center>MainApplication.java</center>
+
+<p>그리고 MainApplication.java의 내용 중 onCreate() 메소드가 보입니다. Android에서 해당 component 객체가 생성될 때 onCreate()가 호출되기 때문에 MainApplication의 onCreate() 메소드에서 작업하는 것이 좋습니다.<br>코드를 조금 더 살펴보겠습니다.. ReactNativeHost 객체가 생성되어 있고, ReactNativeHost 파일 코드를 확인할 수 있습니다. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	* Returns a custom path of the bundle file. This is used in cases the bundle should be   loaded</span></span><br><span class="line"><span class="comment">	* from a custom path. By default it is loaded from Android assets, from a path specified</span></span><br><span class="line"><span class="comment">	* by &#123;<span class="doctag">@link</span> getBundleAssetName&#125;.</span></span><br><span class="line"><span class="comment">* e.g. "file://sdcard/myapp_cache/index.android.bundle"</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="meta">@Nullable</span> <span class="function">String <span class="title">getJSBundleFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<center>ReactNativeHost.java</center>
+
+<p>128 라인 정도에 getJSBundleFile()라는 메소드가 보이는데, 설명을 보면 bundle file의 경로를 커스텀하게 변경 가능하다고 되어 있습니다. 파악된 내용을 바탕으로 JavaScript Bundle 보호 시나리오를 작성합니다.</p>
+<ol>
+<li>우선 앱 빌드 후 decompile 하고 assets 폴더의 index.android.bundle 추출</li>
+<li>index.android.bundle 파일 암호화</li>
+<li>암호화된 index.android.bundle 파일로 교체</li>
+<li>compile 및 서명</li>
+</ol>
+<p>위의 시나리오를 테스트하기 위해 테스트 코드를 작성합니다.</p>
+<ol>
+<li>MainApplication onCreate()에서 assets 폴더에 있는 index.android.bundle 파일 index.android.bundle.enc로 암호화</li>
+<li>index.android.bundle.enc 파일을 External file 폴더에 index.android.bundle.enc.dec 파일로 복호화</li>
+<li>getJSBundleFile() 메소드를 오버로딩하여 React Native에서 해당 파일을 로딩하도록 변경</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">getJSBundleFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getExternalFilesDir(<span class="keyword">null</span>).getAbsolutePath()+<span class="string">"/index.android.bundle.enc.dec"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center>ReactNativeHost 테스트 코드</center>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line"></span><br><span class="line">    AssetManager assetManager = getAssets();</span><br><span class="line">    <span class="keyword">byte</span>[] key = getKey();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// make encrypt file</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        inputStream = assetManager.open(<span class="string">"index.android.bundle"</span>, AssetManager.ACCESS_BUFFER);</span><br><span class="line">        bufferedInputStream = <span class="keyword">new</span> BufferedInputStream(inputStream);</span><br><span class="line">        outputStream = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(getExternalFilesDir(<span class="keyword">null</span>), <span class="string">"index.android.bundle.enc"</span>));</span><br><span class="line">        bufferedOutputStream = <span class="keyword">new</span> BufferedOutputStream(outputStream);</span><br><span class="line">     </span><br><span class="line">        <span class="keyword">byte</span>[] readBuffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">     </span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((len = bufferedInputStream.read(readBuffer, <span class="number">0</span>, readBuffer.length)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(len &lt; <span class="number">1024</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=len; i&lt;<span class="number">1024</span>; i++) &#123;</span><br><span class="line">                    readBuffer[i] = <span class="number">0x00</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            bufferedOutputStream.write(encodeFile(key, readBuffer));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            bufferedInputStream.close();</span><br><span class="line">            bufferedOutputStream.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// make decrypt file</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//inputStream = new FileInputStream(new File(getExternalFilesDir(null), "index.android.bundle.enc"));</span></span><br><span class="line">        inputStream = assetManager.open(<span class="string">"index.android.bundle.enc"</span>, AssetManager.ACCESS_BUFFER);</span><br><span class="line">        bufferedInputStream = <span class="keyword">new</span> BufferedInputStream(inputStream);</span><br><span class="line">        outputStream = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(getExternalFilesDir(<span class="keyword">null</span>), <span class="string">"index.android.bundle.enc.dec"</span>));</span><br><span class="line">        bufferedOutputStream = <span class="keyword">new</span> BufferedOutputStream(outputStream);</span><br><span class="line">     </span><br><span class="line">        <span class="keyword">byte</span>[] readBuffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">     </span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((len = bufferedInputStream.read(readBuffer, <span class="number">0</span>, readBuffer.length)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            bufferedOutputStream.write(decodeFile(key, readBuffer));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            bufferedInputStream.close();</span><br><span class="line">            bufferedOutputStream.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    SoLoader.init(<span class="keyword">this</span>, <span class="comment">/* native exopackage */</span> <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center>MainApplication 테스트 코드</center>
+
+<p>테스트 코드 작성 후 앱을 빌드하게 되면 정상적으로 동작함을 확인할 수 있습니다. 테스트 코드를 편집하여 JavaScript Bundle 보호 시나리오를 수행하여도 정상적으로 동작합니다.</p>
+<p>1편(<a href="https://wooyeol.github.io/2018/09/10/React-Native-Android-Decompile-1/)의">https://wooyeol.github.io/2018/09/10/React-Native-Android-Decompile-1/)의</a> decompile 절차를 다시 수행 후, index.android.bundle 파일을 열어보면 다음과 같이 암호화되어 내용 확인 및 수정이 불가능합니다.</p>
+<p><img src="https://user-images.githubusercontent.com/9836231/49198898-b5992c00-f3d8-11e8-89c1-a01e53564bed.png" alt="img"></p>
+<center>암호화된 index.android.bundle 파일</center>
+
+<p>전체 테스트 코드는 GitHub에서 확인할 수 있습니다. ( 참고 :<a href="https://github.com/wooyeol/reactnative_appsec" target="_blank" rel="noopener">https://github.com/wooyeol/reactnative_appsec</a>)</p>
+<p>현재의 테스트 프로젝트를 실제 적용하기 위해서는 성능 이슈, 키 관리 이슈 등 해결해야 할 문제들이 많습니다. bundle 로딩 전 디코딩 작업을 위해 Splash 화면을 추가하는 방법,  bundle 로딩 전 인증페이지를 안드로이드 only 코드로 별도로 생성하는 방법, bundle 파일 자체를 네트워크를 통하여 받아오는 방법 등 다양한 방법들을 고민해야 할 것입니다.</p>
+<p>물론 이러한 방법으로 bundle 파일을 보호하는 것도 좋은 방법일 수 있지만, 우선적으로 Server-Client 구조의 앱을 개발한다면, 중요한 정보 처리 및 비즈니스 로직은 Server-Side에서 수행하는 것이 조금 더 보안에 적합할 수 있습니다. </p>
+<p>지금까지 총 2회에 걸쳐서 React Native의 decompile과 보안에 대해서 알아보았는데요. 도움이  되셨나요? React Native를 이용하여 한번에 다양한 플랫폼의 앱을 개발할 수 있더라도, 각 플랫폼마다 보안 취약점을 이해하고 별도의 보안을 강화하는 작업이 무엇보다 중요합니다. 이 점을 다시 한번 강조하며 글을 마무리하겠습니다. 감사합니다.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/wooyeol" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 Wooyeol Jung<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
